@@ -1,4 +1,4 @@
-var pendulum;
+var pendulum, bar;
 var mechanicEnergy;
 var pulse = 0.0;
 const g = 0.8;
@@ -12,6 +12,7 @@ function setup() {
     drawingContext.shadowColor = color(255, 255, 255);
 
     pendulum = new Pendulum(createVector(width/2, height/4), 3, 475, PI/8);
+    bar = new EnergyBar(0, 60, 20, color(243, 179, 117), color(0, 0, 0), 3, 2);
 }
 
 function draw() { 
@@ -23,6 +24,8 @@ function draw() {
     pendulum.update();
 
     mechanicEnergy = pendulum.getEnergy();
+    //bar.show();
+
     rect(120, height-150, 30, -int(mechanicEnergy.x));
     rect(160, height-150, 30, -int(mechanicEnergy.y));
     text("K", 120, height-118);
