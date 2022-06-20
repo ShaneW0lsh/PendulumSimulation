@@ -1,29 +1,35 @@
 class EnergyBar { 
-    constructor(x, y, height, kColor, pColor, K, P) { 
-        this.pos = createVector(x, y);
-        this.H = height;
+    constructor(X, Y, W, H, kColor, pColor, K, P) { 
+        this.X = X, this.Y = Y;
+        this.W = W, this.H = H;
         this.color = createVector(kColor, pColor);
-        this.kineticEnergy = K;
-        this.potentialEnergy = P;
+        this.K = K, this.P = P;
     }
     
     update(K, P) { 
-        this.kineticEnergy = K;
-        this.potentialEnergy = P;
+        this.K = K;
+        this.P = P;
     }
 
     show() {
-        let X = this.pos.x, Y = this.pos.y;
-        let kineticW = this.K / (this.K + this.P),
-            potentialW = this.P / (this.K + this.P);
+        let kineticW = this.K / (this.K + this.P) * this.W,
+            potentialW = this.P / (this.K + this.P) * this.W;
 
         push();
-        strokeWeight(5);
-        stroke(0);
+        noStroke();
+
+        push();
+        drawingContext.shadowColor = color(this.color.x);
         fill(this.color.x);
-        rect(X, Y, kineticW, this.H);
+        rect(this.X, this.Y, kineticW, this.H);
+        pop();
+
+        push();
+        drawingContext.shadowColor = color(this.color.y);
         fill(this.color.y);
-        rect(X + kineticW, Y, potentialW, this.H);
+        rect(this.X + kineticW, this.Y, potentialW, this.H);
+        pop();
+
         pop();
     }
 }
