@@ -1,7 +1,7 @@
 var pendulum;
 var mechanicEnergy;
 var pulse = 0.0;
-const g = 1.5;
+const g = 0.8;
 
 function setup() { 
     createCanvas(1900, 925);
@@ -11,7 +11,7 @@ function setup() {
     textSize(35);
     drawingContext.shadowColor = color(255, 255, 255);
 
-    pendulum = new Pendulum(createVector(width/3, height/4), 1, 475, PI/8);
+    pendulum = new Pendulum(createVector(width/2, height/4), 3, 475, PI/8);
 }
 
 function draw() { 
@@ -23,8 +23,10 @@ function draw() {
     pendulum.update();
 
     mechanicEnergy = pendulum.getEnergy();
-    let energyText = `Kinetic energy: ${int(mechanicEnergy.x)}\nPotential energy: ${int(mechanicEnergy.y)}`
-    text(energyText, width/4, 55)
+    rect(120, height-150, 30, -int(mechanicEnergy.x));
+    rect(160, height-150, 30, -int(mechanicEnergy.y));
+    text("K", 120, height-118);
+    text("P", 160, height-118);
 
     push();
     fill(243, 179, 117); 
