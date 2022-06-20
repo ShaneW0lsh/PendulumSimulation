@@ -5,14 +5,19 @@ class Pendulum {
         this.armLength = armLength;
         this.angle = angle;
         this.angleV = 0.0;
-        this.dumping = 0.9995;
+        this.damping = 1;//0.9995;      {kinetic, potential}
+        this.mechanicEnergy = createVector(0, mass * g * (armLength - armLength * sin(angle)));
     }
 
     update() { 
         let angleAcc = cos(this.angle) * g / (this.armLength);
         this.angleV += angleAcc;
-        this.angleV *= this.dumping;
+        this.angleV *= this.damping;
         this.angle += this.angleV;
+
+        let linearVelocity = this.angleV * this.armLength;
+        this.mechanicEnergy = createVector(this.mass * linearVelocity * linearVelocity / 2,
+                                        this.mass * g * (this.armLength - this.armLength * sin(this.angle)));
     }
 
     show() { 
@@ -26,5 +31,9 @@ class Pendulum {
         noStroke();
         circle(EX, EY, 90);
         pop();
+    }
+
+    getEnergy() { 
+        return this.mechanicEnergy;
     }
 }
