@@ -5,7 +5,7 @@ var mechanicEnergy;
 var pulse = 0.0;
 
 function setup() { 
-    createCanvas(1525, 925);
+    createCanvas(1900, 925);
 
     noStroke();
     stroke(255, 255, 255);
@@ -13,7 +13,7 @@ function setup() {
     textSize(35);
     drawingContext.shadowColor = color(255, 255, 255);
 
-    pendulum = new Pendulum(createVector(width/2, height/4), 3, 475, PI/8);
+    pendulum = new Pendulum(createVector(width/2, height/4), 3, 475, 0.1);
 
     let kEColor = color(240, 84, 84);
     let pEColor = color(78, 116, 153);
