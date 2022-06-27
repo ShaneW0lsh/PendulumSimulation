@@ -1,4 +1,4 @@
-const g = 0.8;
+const g = 0.9;
 
 var pendulum, bar;
 var mechanicEnergy;
